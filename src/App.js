@@ -21,7 +21,6 @@ const App = () => {
   }
 
   const handleSumNumbers = () => {
-
     if (firstNumber === '0'){
       setFirstNumber(String(currentNumber));
       setCurrentNumber('0');
@@ -31,11 +30,9 @@ const App = () => {
       setCurrentNumber(String(sum));
       setOperation('');
     }
-
   }
 
   const handleSubNumbers = () => {
-
     if (firstNumber === '0'){
       setFirstNumber(String(currentNumber));
       setCurrentNumber('0');
@@ -45,11 +42,33 @@ const App = () => {
       setCurrentNumber(String(sub));
       setOperation('');
     }
+  }
 
+  const handleMultNumbers = () => {
+    if (firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('x');
+    }else{
+      const mult = Number(firstNumber) * Number(currentNumber);
+      setCurrentNumber(String(mult));
+      setOperation('');
+    }
+  }
+
+  const handleDivNumbers = () => {
+    if (firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('/');
+    }else{
+      const div = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(div));
+      setOperation('');
+    }
   }
 
   const handleEquals = () => {
-
     if (firstNumber !== '0' && operation !== '' && currentNumber !== '0'){
       switch(operation) {
         case '+':
@@ -58,11 +77,16 @@ const App = () => {
         case '-':
           handleSubNumbers();
           break;
+        case 'x':
+          handleMultNumbers();
+          break;
+        case '/':
+          handleDivNumbers();
+          break;
         default:
           break;
       }
     }
-
   }
 
 
@@ -71,8 +95,8 @@ const App = () => {
       <Content>
         <Input value={currentNumber} />
         <Row>
-          <Button label="x"/>
-          <Button label="/"/>
+          <Button label="x" onClick={handleMultNumbers}/>
+          <Button label="/" onClick={handleDivNumbers}/>
           <Button label="C" onClick={handleOnClear}/>
           <Button label="."/>
         </Row>
